@@ -109,6 +109,9 @@ Validate all end points with api-docs
 ```
 http://localhost:8090/swagger-ui.html#/
 ```
+## Class Diagram
+
+![Class diagram](UML_Class_Diagram.png)
 
 ## Built With
 
