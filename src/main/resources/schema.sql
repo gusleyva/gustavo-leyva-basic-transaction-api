@@ -1,0 +1,11 @@
+
+
+DROP TABLE IF EXISTS TRANSACTION;
+  
+CREATE TABLE TRANSACTION (
+  id VARCHAR(250) PRIMARY KEY,
+  amount double,
+  created TIMESTAMP default not null,
+  description VARCHAR(1000) DEFAULT NULL,
+  user_id INT NOT NULL
+);
