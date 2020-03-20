@@ -43,7 +43,7 @@ Clone: git clone https://github.com/gusleyva/gustavo-leyva-basic-transaction-api
 Open a terminal window (bash/terminal) and move to the project
 
 ```
-cd ~/workspace/basic-transaction-api-v1/
+cd ~/workspace/gustavo-leyva-basic-transaction-api/
 ```
 
 Do a maven clean install. Validate that you have an internet connection to download dependencies
