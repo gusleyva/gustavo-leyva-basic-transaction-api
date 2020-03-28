@@ -1,7 +1,7 @@
 # Basic Transaction REST API
 basic-transaction-api-v1
 
-Hi! This is a basic Spring-Boot application where we are exposing a Transaction API
+Hi! This is a basic Spring-Boot application where we are exposing a Transaction API.
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install the software and how to install them:
 
 ```
 Maven
@@ -37,13 +37,13 @@ Download or clone the project
 
 ```
 Download: Click on download link
-Clone: git clone https://github.com/gusleyva/basic-transaction-api-v1.git
+Clone: git clone https://github.com/gusleyva/gustavo-leyva-basic-transaction-api.git
 ```
 
 Open a terminal window (bash/terminal) and move to the project
 
 ```
-cd ~/workspace/basic-transaction-api-v1/
+cd ~/workspace/gustavo-leyva-basic-transaction-api/
 ```
 
 Do a maven clean install. Validate that you have an internet connection to download dependencies
@@ -119,6 +119,9 @@ http://localhost:8080/api/v1/transactions/accumulated/{user_id}
 http://localhost:8080/api/v1/transactions/weeklyreport/{user_id}
 http://localhost:8080/api/v1/transactions/random
 ```
+## Class Diagram
+
+![Class diagram](UML_Class_Diagram.png)
 
 ## Built With
 
