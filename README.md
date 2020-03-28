@@ -54,26 +54,11 @@ mvn clean install
 If everything is compiled correctly you will see something similar to:
 
 ```
-[INFO] 
-[INFO] Results:
-[INFO] 
-[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
-[INFO] 
-[INFO] 
-[INFO] --- maven-jar-plugin:3.1.2:jar (default-jar) @ basic-transaction-api-v1 ---
-[INFO] Building jar: /workspace/SpringBoot/basic-transaction-api-v1/target/basic-transaction-api-v1-0.0.1-SNAPSHOT.jar
-[INFO] 
-[INFO] --- spring-boot-maven-plugin:2.2.2.RELEASE:repackage (repackage) @ basic-transaction-api-v1 ---
-[INFO] Replacing main artifact with repackaged archive
-[INFO] 
 [INFO] --- maven-install-plugin:2.5.2:install (default-install) @ basic-transaction-api-v1 ---
 [INFO] Installing /workspace/SpringBoot/basic-transaction-api-v1/target/basic-transaction-api-v1-0.0.1-SNAPSHOT.jar to /.m2/repository/basic-transaction-api-v1/basic-transaction-api-v1/0.0.1-SNAPSHOT/basic-transaction-api-v1-0.0.1-SNAPSHOT.jar
 [INFO] Installing /workspace/SpringBoot/basic-transaction-api-v1/pom.xml to /.m2/repository/basic-transaction-api-v1/basic-transaction-api-v1/0.0.1-SNAPSHOT/basic-transaction-api-v1-0.0.1-SNAPSHOT.pom
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  18.186 s
-[INFO] Finished at: 2020-03-19T16:50:03-06:00
 [INFO] ------------------------------------------------------------------------
 
 ```
