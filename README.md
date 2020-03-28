@@ -107,7 +107,17 @@ http://localhost:8080/
 Validate all end points with api-docs
 
 ```
-http://localhost:8090/swagger-ui.html#/
+http://localhost:8080/swagger-ui.html#/
+```
+Example of existing end points
+
+```
+http://localhost:8080/api/v1/transactions/
+http://localhost:8080/api/v1/transactions/{transaction_id}
+http://localhost:8080/api/v1/transactions/user/{user_id
+http://localhost:8080/api/v1/transactions/accumulated/{user_id}
+http://localhost:8080/api/v1/transactions/weeklyreport/{user_id}
+http://localhost:8080/api/v1/transactions/random
 ```
 
 ## Built With

@@ -1,6 +1,8 @@
 package com.basic.transaction.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +20,7 @@ import com.basic.transaction.services.dto.TransactionDto;
 import com.basic.transaction.services.dto.TransactionReportDto;
 import com.basic.transaction.services.dto.TransactionWeeklyReportDto;
 import com.basic.transaction.services.mappers.TransactionMapper;
+import com.basic.transaction.utils.TransactionDateUtils;
 
 @Service
 public class TransactionService implements ITransactionService{
@@ -174,20 +177,66 @@ public class TransactionService implements ITransactionService{
 	}
 	
 	protected List<TransactionReportDto> getTransactionWeeklyReport(Long userId, List<TransactionDto> listTransactionDto){
-		//TODO
+		if(listTransactionDto == null || listTransactionDto.isEmpty())
+			return Collections.emptyList();
+		
 		List<TransactionReportDto> transactionReportDtoList = new ArrayList<>();
-		for(TransactionDto transactionDto: listTransactionDto) {
-			TransactionReportDto transactionReportDto = new TransactionReportDto();
-			//setid
-			//setWeekStart
-			//setWeekFinish
-			//setQuantity
-			//setAmount
-			//setTotalAmount
-			transactionReportDtoList.add(transactionReportDto);
+		//Get minor date
+		Date minorDate = TransactionDateUtils.getMinorDate(listTransactionDto);
+		//Get week start
+		Date weekStartDate = TransactionDateUtils.getPreviousFriday(minorDate); //Starts on Friday
+		Date weekFinishDate = TransactionDateUtils.getWeekFinishDate(weekStartDate); //Ends on Thursday
+		
+		int numberOfTransactions = 0;
+		double sumAmountOfTransactions = 0.0;
+		Double totalAmount = 0.0;
+		
+		int sizeList = listTransactionDto.size() - 1;
+		int position = 0;
+		
+		while(position <= sizeList) {
+			TransactionDto transactionDto = listTransactionDto.get(position);
+			
+			Date transactionDate = transactionDto.getCreated();
+			
+			boolean isInsideWeek = transactionDate.compareTo(weekStartDate) >= 0 && transactionDate.compareTo(weekFinishDate) <= 0;
+			
+			if(isInsideWeek) {
+				numberOfTransactions++;
+				sumAmountOfTransactions += transactionDto.getAmount();
+				position++;
+			}else {
+				createTransactionReportDtoRecord(numberOfTransactions, transactionReportDtoList, userId, weekStartDate, weekFinishDate,
+						totalAmount, sumAmountOfTransactions);
+				
+				weekStartDate = TransactionDateUtils.getDatePlusNumberDays(weekFinishDate, 1);
+				weekFinishDate = TransactionDateUtils.getWeekFinishDate(weekStartDate);
+				totalAmount += sumAmountOfTransactions;
+				numberOfTransactions = 0;
+				sumAmountOfTransactions = 0;
+			}
 		}
 		
-		return null;
+		//If there are pending transactions
+		createTransactionReportDtoRecord(numberOfTransactions, transactionReportDtoList, userId, weekStartDate, weekFinishDate,
+				totalAmount, sumAmountOfTransactions);
+		
+		return transactionReportDtoList;
+	}
+	
+	protected void createTransactionReportDtoRecord(int numberOfTransactions, List<TransactionReportDto> transactionReportDtoList,
+			long userId, Date weekStartDate, Date weekFinishDate, Double totalAmount, double sumAmountOfTransactions) {
+		if(numberOfTransactions > 0) {
+			TransactionReportDto transactionReportDto = new TransactionReportDto();
+			transactionReportDto.setUserId(userId);
+			transactionReportDto.setWeekStart(weekStartDate);
+			transactionReportDto.setWeekFinish(weekFinishDate);
+			transactionReportDto.setQuantity(numberOfTransactions);
+			transactionReportDto.setAmount(sumAmountOfTransactions);
+			transactionReportDto.setTotalAmount(totalAmount);
+			
+			transactionReportDtoList.add(transactionReportDto);
+		}
 	}
 	
 	/**

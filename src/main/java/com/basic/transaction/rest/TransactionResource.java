@@ -22,6 +22,7 @@ import com.basic.transaction.service.TransactionService;
 import com.basic.transaction.service.interfaces.ITransactionService;
 import com.basic.transaction.services.dto.TransactionAccumulatedDto;
 import com.basic.transaction.services.dto.TransactionDto;
+import com.basic.transaction.services.dto.TransactionReportDto;
 import com.basic.transaction.services.dto.TransactionWeeklyReportDto;
 
 @RestController
@@ -83,8 +84,8 @@ public class TransactionResource {
 	}
 	
 	@GetMapping(value = "/weeklyreport/{userId}", produces = APPLICATION_JSON_VALUE)
-	public List<TransactionWeeklyReportDto> queryTransactionWeeklyReport(@PathVariable(name = "userId")Long userId){
-		return transactionService.getTransactionWeeklyReportByUserId(userId);
+	public List<TransactionReportDto> queryTransactionWeeklyReport(@PathVariable(name = "userId")Long userId){
+		return transactionService.getTransactionWeeklyReportByUserIdNoDatabase(userId);
 	}
 	
 	@GetMapping(value = "/random", produces = APPLICATION_JSON_VALUE)
